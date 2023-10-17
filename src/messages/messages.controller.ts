@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { Message } from './schemas/message.schema';
@@ -10,6 +19,7 @@ export class MessagesController {
   constructor(private messagesService: MessagesService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   async createMessage(
     @Body() createMessageDto: CreateMessageDto,
   ): Promise<Message> {
@@ -18,7 +28,7 @@ export class MessagesController {
 
   @Get()
   async getAllMessages(
-    @Query() messageFiltersDto: GetMessagesFiltersDto,
+    @Query(ValidationPipe) messageFiltersDto: GetMessagesFiltersDto,
   ): Promise<CreateMessageDto[]> {
     return this.messagesService.getMessages(messageFiltersDto);
   }
