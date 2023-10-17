@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { Message, MessageDocument } from './schemas/message.schema';
 import { GetMessagesFiltersDto } from './dto/get-messages-filters.dto';
-import { filtersUtility } from 'src/lib/filter.utility';
+import { filtersUtility } from '../lib/filter.utility';
 import { DeleteMessageFilterDto } from './dto/delete-message-filter.dto';
 
 @Injectable()
