@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 export type MessageDocument = HydratedDocument<Message>;
-@Schema()
+@Schema({ timestamps: true })
 export class Message {
   @Prop()
   name: string;
@@ -16,8 +16,8 @@ export class Message {
   @Prop()
   merchantId: string;
 
-  @Prop([Date])
-  timestamp: string;
+  @Prop({ type: Object })
+  body: { rawMessage: string };
 }
 
 export const MessageSchema = SchemaFactory.createForClass(Message);
