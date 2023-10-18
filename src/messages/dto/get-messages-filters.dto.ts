@@ -1,10 +1,15 @@
-import { IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsDate, IsOptional } from 'class-validator';
 
 export class GetMessagesFiltersDto {
   @IsOptional()
+  @Type(() => Number)
   skip: number;
   @IsOptional()
+  @Type(() => Number)
   limit: number;
+  @IsOptional()
+  sortOrder: string;
   @IsOptional()
   sortDirection: string;
   @IsOptional()
@@ -20,7 +25,9 @@ export class GetMessagesFiltersDto {
   @IsOptional()
   _id: string;
   @IsOptional()
+  @IsDate()
   endDate: string;
   @IsOptional()
+  @IsDate()
   startDate: string;
 }

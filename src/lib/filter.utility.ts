@@ -7,15 +7,18 @@ export function filtersUtility(filters: GetMessagesFiltersDto): {
   projections: any;
   options: any;
 } {
-  const { skip, limit, sortDirection, sortField, ...rest } = filters;
+  const { skip, limit, sortDirection, sortField, sortOrder, ...rest } = filters;
   const filtersQuery: FilterQuery<Message> = rest;
   const projections = {};
-  const options = { skip, limit, sort: {} };
+  const options = { skip, limit, sort: {}, sortOrder };
   if (skip) {
     options.skip = skip;
   }
   if (limit) {
     options.limit = limit;
+  }
+  if (sortOrder) {
+    options.sortOrder = sortOrder;
   }
   if (sortDirection && sortField) {
     options.sort = {
