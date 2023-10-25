@@ -12,7 +12,9 @@ export abstract class EntityRepository<T extends Document> {
   }
 
   async create(createEntityData: any[]): Promise<T[]> {
-    return await this.entityModel.insertMany(createEntityData);
+    const result = await this.entityModel.insertMany(createEntityData);
+    const _IdsCreated = result.map((doc) => doc.id);
+    return _IdsCreated;
   }
 
   async delete(entityFilterQuery: FilterQuery<T>): Promise<number> {
