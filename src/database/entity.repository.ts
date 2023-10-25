@@ -11,9 +11,8 @@ export abstract class EntityRepository<T extends Document> {
     return this.entityModel.find(entityFilterQuery, projections, options);
   }
 
-  async create(createEntityData: unknown): Promise<T> {
-    const entity = new this.entityModel(createEntityData);
-    return entity.save();
+  async create(createEntityData: any[]): Promise<T[]> {
+    return await this.entityModel.insertMany(createEntityData);
   }
 
   async delete(entityFilterQuery: FilterQuery<T>): Promise<number> {

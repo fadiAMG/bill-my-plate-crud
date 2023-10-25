@@ -17,7 +17,9 @@ export class MessagesService {
     return this.messageRepository.find(filters, projections, options);
   }
 
-  async createMessage(createMessageDto: CreateMessageDto): Promise<Message> {
+  async createMessage(
+    createMessageDto: CreateMessageDto[],
+  ): Promise<Message[]> {
     return this.messageRepository.create(createMessageDto);
   }
 

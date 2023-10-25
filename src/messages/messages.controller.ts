@@ -21,8 +21,8 @@ export class MessagesController {
   @Post()
   @UsePipes(ValidationPipe)
   async createMessage(
-    @Body() createMessageDto: CreateMessageDto,
-  ): Promise<Message> {
+    @Body() createMessageDto: CreateMessageDto[],
+  ): Promise<Message[]> {
     return this.messagesService.createMessage(createMessageDto);
   }
 

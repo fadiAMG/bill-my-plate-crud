@@ -13,17 +13,3 @@ export class MessagesRepository extends EntityRepository<MessageDocument> {
     super(messageModel);
   }
 }
-
-// async find(messageFiltersDto: GetMessagesFiltersDto): Promise<Message[]> {
-//   // TODO: projections to be implemented later
-//   const { filters, projections, options } = filtersUtility(messageFiltersDto);
-//   return this.messageModel.find(filters, projections, options);
-// }
-
-// async delete(deleteFiltersDto: DeleteMessageFilterDto): Promise<number> {
-//   return (await this.messageModel.deleteMany(deleteFiltersDto)).deletedCount;
-// }
-
-// async create(message: Message): Promise<Message> {
-//   return this.messageModel.create(message);
-// }
