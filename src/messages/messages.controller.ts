@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Post,
   Query,
   UsePipes,
@@ -30,7 +31,15 @@ export class MessagesController {
   async getAllMessages(
     @Query(ValidationPipe) messageFiltersDto: GetMessagesFiltersDto,
   ): Promise<CreateMessageDto[]> {
-    return this.messagesService.getMessages(messageFiltersDto);
+    try {
+      const result = await this.messagesService.getMessages(messageFiltersDto);
+      if (result.length === 0) {
+        throw new NotFoundException('No messages found');
+      }
+      return result;
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 
   @Delete()
