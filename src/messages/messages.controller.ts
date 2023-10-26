@@ -46,6 +46,16 @@ export class MessagesController {
   async deleteMessages(
     @Query() deleteMessageFilterDto: DeleteMessageFilterDto,
   ): Promise<number> {
-    return this.messagesService.deleteMessages(deleteMessageFilterDto);
+    try {
+      const result = await this.messagesService.deleteMessages(
+        deleteMessageFilterDto,
+      );
+      if (result === 0) {
+        throw new NotFoundException('No messages found');
+      }
+      return result;
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 }
