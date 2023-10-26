@@ -54,16 +54,9 @@ describe('MessageController', () => {
 
   describe('createMessage', () => {
     describe('when message is created', () => {
-      let message: Message;
+      let message: Message[];
 
       beforeEach(async () => {
-        message = {
-          type: messageStub().type,
-          umti: messageStub().umti,
-          merchantId: messageStub().merchantId,
-          body: messageStub().body,
-          name: messageStub().name,
-        };
         message = await messagesController.createMessage(message);
       });
 
