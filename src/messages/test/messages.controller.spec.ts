@@ -57,7 +57,7 @@ describe('MessageController', () => {
       let message: Message[];
 
       beforeEach(async () => {
-        message = await messagesController.createMessage(message);
+        message = await messagesController.createMessage(messageStub());
       });
 
       test('then it should be called with body parameters', () => {
