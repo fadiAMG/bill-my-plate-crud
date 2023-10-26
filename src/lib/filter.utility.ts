@@ -1,11 +1,23 @@
 import { FilterQuery } from 'mongoose';
-import { GetMessagesFiltersDto } from 'src/messages/dto/get-messages-filters.dto';
+// import { GetMessagesFiltersDto } from 'src/messages/dto/get-messages-filters.dto';
 import { Message } from 'src/messages/schemas/message.schema';
 
-export function filtersUtility(filters: GetMessagesFiltersDto): {
-  filters: FilterQuery<Message>;
+type Filter = {
+  [key: string]: any;
+};
+type Options = {
+  skip?: number;
+  limit?: number;
+  sortDirection?: 'asc' | 'desc';
+  sortOrder?: string;
+};
+
+export function filtersUtility<T extends Filter>(
+  filters: T,
+): {
+  filters: FilterQuery<T>;
   projections: any;
-  options: any;
+  options: Options;
 } {
   const { skip, limit, sortDirection, sortField, sortOrder, ...rest } = filters;
   const filtersQuery: FilterQuery<Message> = rest;
